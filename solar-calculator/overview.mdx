@@ -1,0 +1,91 @@
+---
+title: "Solar Calculator: Compute Sun Position for Wallpapers"
+description: "Learn how Equinox computes the sun's altitude and azimuth from a location and time, so each photo in your solar wallpaper shows at the right moment."
+---
+
+Solar wallpapers in macOS work by comparing the sun's current position in the sky against the position recorded for each photo in your wallpaper sequence. To make this work, Equinox needs to know exactly where the sun was when each photo was taken — its **altitude** (how high above the horizon) and its **azimuth** (the compass direction it was facing). The Solar Calculator is the built-in tool that computes these two values from a place, a date, and a time, so you never have to do the trigonometry yourself.
+
+## What altitude and azimuth mean
+
+Every solar wallpaper image is tagged with two numbers that describe the sun's position in the sky at the moment the photo was captured.
+
+<CardGroup cols={2}>
+  <Card title="Altitude" icon="arrow-up">
+    The sun's elevation angle above the horizon, measured in degrees. **0°** means the sun is exactly on the horizon (sunrise or sunset). **90°** means it is directly overhead (solar noon at the equator). Negative values mean the sun is below the horizon.
+  </Card>
+  <Card title="Azimuth" icon="compass">
+    The sun's compass direction, measured in degrees clockwise from north. **0°** is north, **90°** is east, **180°** is south, and **270°** is west. Together with altitude, this uniquely identifies the sun's position.
+  </Card>
+</CardGroup>
+
+macOS reads these two values from each image at runtime and picks the image whose recorded sun position is closest to the actual current sun position at your location. The more accurately you set altitude and azimuth for each photo, the more realistic and smooth your wallpaper transitions will be.
+
+## How the calculator works
+
+The Solar Calculator uses the [SolarNOAA](https://github.com/rlxone/SolarNOAA) algorithm — a Swift implementation of NOAA's solar position equations — to compute altitude and azimuth from four inputs:
+
+- **Latitude and longitude** — the GPS coordinates of where the photo was taken
+- **Date** — the calendar date of the photo
+- **Time** — the time of day the photo was taken
+- **Timezone** — the UTC offset for the location at that date and time
+
+You supply these through the calculator's interface (a map, a date picker, and a sun timeline), and Equinox immediately shows you the resulting altitude and azimuth values rounded to two decimal places.
+
+## EXIF metadata auto-fill
+
+Many cameras and smartphones embed location and timestamp data directly into image files as EXIF metadata. When you open the Solar Calculator for an image that contains this data, Equinox can read the following fields automatically:
+
+| EXIF field | Used for |
+|---|---|
+| GPS latitude | Pre-fills the latitude coordinate |
+| GPS longitude | Pre-fills the longitude coordinate |
+| Creation date | Pre-fills the date and time fields |
+| Timezone | Sets the UTC offset |
+
+<Tip>
+  Photos taken with an iPhone or most modern Android phones almost always include GPS coordinates and a creation timestamp. Use these images and the calculator will require minimal manual input.
+</Tip>
+
+<Warning>
+  Photos imported from a scanner, downloaded from the web, or exported from certain editing apps may have had their EXIF metadata stripped. In these cases you will need to enter the location and time manually.
+</Warning>
+
+## How the result is assigned to an image
+
+Once the calculator shows an altitude and azimuth, you assign those values to a specific image in your solar wallpaper. You can do this in two ways:
+
+- **Drag and drop** — drag the result card directly onto the image tile in the wallpaper editor
+- **Copy** — copy the values and paste them manually onto the image
+
+Each image in your wallpaper sequence stores its own altitude and azimuth, so you repeat this process for every photo in the set.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What if I don't know the exact time the photo was taken?">
+    You can use the Sun Timeline in the calculator to estimate. The timeline shows a chart of the sun's elevation throughout the day at the selected location. Drag the timeline scrubber until the elevation curve matches the sun's apparent height in your photo — for example, a low golden-hour shot should correspond to an elevation close to 0°, while a midday shot should align with the peak of the curve. This gives you a close enough value for a convincing wallpaper.
+  </Accordion>
+  <Accordion title="What if my photo has no GPS data?">
+    Enter the coordinates manually in the latitude and longitude fields, or use the interactive map in the calculator to click the approximate location where the photo was taken. You can type decimal degrees directly (for example, `48.858` for latitude and `2.294` for longitude for central Paris).
+  </Accordion>
+  <Accordion title="What does the dlstime (daylight saving time) setting do?">
+    The `dlstime` parameter tells the NOAA algorithm whether daylight saving time was in effect when the photo was taken. When the calculator detects that the selected timezone observes DST on the selected date, it displays a daylight saving time indicator. Set this to account for the one-hour offset that DST introduces — otherwise the computed sun position will be off by one hour's worth of movement.
+  </Accordion>
+  <Accordion title="Do I need the Solar Calculator for time-based or appearance wallpapers?">
+    No. The Solar Calculator is only used for **solar wallpapers**. Time-based wallpapers use a schedule you define directly, and appearance wallpapers switch on system Light/Dark mode. See [Solar Wallpapers](/wallpapers/solar) for more detail on when solar metadata is required.
+  </Accordion>
+  <Accordion title="Can multiple images share the same altitude and azimuth?">
+    Technically yes, but it will cause macOS to behave unpredictably when choosing which image to display. Each image in a solar wallpaper should have a unique altitude and azimuth that corresponds to the actual sun position when that specific photo was captured.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Using the Solar Calculator" icon="sliders" href="/solar-calculator/using-calculator">
+    Follow the step-by-step walkthrough for entering location, date, and time, and assigning the result to each image.
+  </Card>
+  <Card title="Solar wallpapers" icon="sun" href="/wallpapers/solar">
+    Learn how macOS uses altitude and azimuth data at runtime to select the right image from your wallpaper set.
+  </Card>
+</CardGroup>

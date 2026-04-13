@@ -1,0 +1,80 @@
+---
+title: 'Time Wallpapers: Schedule Your Desktop by the Clock'
+description: 'Build a wallpaper that rotates through images on a time schedule you define, switching automatically when the clock reaches each assigned trigger time.'
+---
+
+Time wallpapers give you direct control over when each image appears on your desktop. You assign a specific time of day to each photo in the set, and macOS displays the image whose scheduled time has most recently passed. When the clock reaches the next trigger time, the wallpaper switches to the corresponding image. This makes time wallpapers ideal for scenes you want tied to daily routines — a bright outdoor photo for the morning work session, a warmer tone for the afternoon, and a darker image for evening.
+
+## How time wallpapers work
+
+Each image in a time wallpaper has a single trigger time stored with it. macOS scans the list and displays the image assigned to the latest trigger time that is still in the past relative to the current clock time. The image marked as **primary** is shown as the initial fallback when the wallpaper first loads, and it also covers any gaps where no scheduled time has been reached yet.
+
+For example, if you schedule images at 07:00, 12:00, 18:00, and 22:00, then at 14:30 macOS displays the 12:00 image. At 18:01 it switches to the 18:00 image. The cycle repeats every day automatically.
+
+<Info>
+Time wallpapers do not require location access or any astronomical calculations. If you want a wallpaper that responds to actual daylight rather than clock time, consider a [solar wallpaper](/wallpapers/solar) instead.
+</Info>
+
+## What you need before you start
+
+- Two or more images to cycle through (you can use as many as you want)
+- A planned schedule — the times of day at which you want each image to appear
+- Images in a supported format: PNG, JPEG, TIFF, or HEIC
+
+## Creating a time wallpaper
+
+<Steps>
+  <Step title="Select the Time type">
+    Open Equinox and choose **Time** from the wallpaper type selector on the main screen. The gallery will open ready for you to add images.
+  </Step>
+  <Step title="Add your images">
+    Drag and drop photos into the gallery, or use the add button to browse. Add one image for each time slot you want in your schedule. You can always add or remove images before exporting.
+  </Step>
+  <Step title="Set a trigger time for each image">
+    Click on each image in the gallery and assign the time of day at which it should appear. Times are entered in 24-hour format. Each image needs a unique trigger time — no two images should share the same time.
+  </Step>
+  <Step title="Mark the primary image">
+    Select one image as **primary**. This image is displayed when the wallpaper first loads and serves as a fallback before the earliest scheduled trigger time has been reached for the day. A sensible choice is the image that represents your typical starting time, such as a morning scene.
+  </Step>
+  <Step title="Export the wallpaper">
+    Click **Export** and choose where to save the file. Equinox bundles all the images and their time metadata into a single HEIC file that macOS treats as a Dynamic Desktop wallpaper.
+  </Step>
+</Steps>
+
+## Planning your schedule
+
+There are no restrictions on how many images you include or how you space the trigger times. A few common patterns:
+
+<CardGroup cols={2}>
+  <Card title="Four-part day" icon="sun">
+    Morning, midday, afternoon, and evening images — four images covering the key phases of the day with trigger times around 06:00, 11:00, 15:00, and 19:00.
+  </Card>
+  <Card title="Work-focused" icon="briefcase">
+    Distinct images for before-work, work hours, and after-work, helping you distinguish your working context visually without needing calendar reminders.
+  </Card>
+  <Card title="Seasonal scenes" icon="leaf">
+    A small set of landscape photos matching broad times of day rather than precise moments, using just two or three trigger times.
+  </Card>
+  <Card title="Night and day" icon="moon">
+    A simple two-image wallpaper — one for daytime hours and one for nighttime. If you want this to track the system appearance toggle instead, see [Appearance wallpapers](/wallpapers/appearance).
+  </Card>
+</CardGroup>
+
+<Tip>
+You can test your time wallpaper without waiting by opening **System Settings → General → Date & Time**, temporarily changing the system clock to a time in each of your scheduled slots, and confirming that the expected image appears on your desktop.
+</Tip>
+
+<Warning>
+Each image must have a unique trigger time. If two images share the same trigger time, only one will be used in the final wallpaper.
+</Warning>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Solar wallpapers" icon="sun" href="/wallpapers/solar">
+    Let the actual position of the sun determine which image is shown, rather than a fixed clock schedule.
+  </Card>
+  <Card title="Setting your wallpaper" icon="monitor" href="/guides/setting-wallpaper">
+    After exporting, follow these steps to apply your new wallpaper in macOS.
+  </Card>
+</CardGroup>

@@ -1,0 +1,109 @@
+---
+title: "Build and Contribute to Equinox: Developer Setup Guide"
+description: "Learn how to build Equinox from source, understand the repository structure, follow code style conventions, and submit a pull request on GitHub."
+---
+
+Equinox is an open-source macOS app licensed under the MIT license. Whether you want to fix a bug, add a feature, or improve the codebase, this guide walks you through everything you need to get a local build running and submit your changes.
+
+## Requirements
+
+Before you begin, make sure you have the following installed on your machine:
+
+<CardGroup cols={2}>
+  <Card title="Xcode" icon="hammer">
+    The latest stable release of Xcode from the Mac App Store or Apple Developer portal.
+  </Card>
+  <Card title="macOS Mojave or later" icon="apple">
+    Equinox targets macOS 10.14 (Mojave) and later, so you will need a compatible macOS version to build and run the app.
+  </Card>
+</CardGroup>
+
+## Building from source
+
+<Steps>
+  <Step title="Clone the repository">
+    Clone the Equinox repository from GitHub to your local machine:
+
+    ```bash
+    git clone https://github.com/rlxone/Equinox.git
+    cd Equinox
+    ```
+  </Step>
+  <Step title="Open the project in Xcode">
+    Open the root `Equinox.xcworkspace` (or the relevant `.xcodeproj`) in Xcode:
+
+    ```bash
+    open Equinox.xcworkspace
+    ```
+  </Step>
+  <Step title="Select a scheme and build">
+    In Xcode, select the **Equinox** scheme and your Mac as the run destination, then press **⌘B** to build or **⌘R** to build and run.
+  </Step>
+</Steps>
+
+<Note>
+  If Xcode reports missing package dependencies, go to **File → Packages → Resolve Package Versions** to fetch them automatically.
+</Note>
+
+## Repository structure
+
+The Equinox repository is organized as a multi-target Xcode workspace split across four modules, each with a clearly defined responsibility:
+
+<CardGroup cols={2}>
+  <Card title="Equinox" icon="app-window">
+    The main AppKit application. Contains the app entry point, window management, and top-level coordinator logic.
+  </Card>
+  <Card title="EquinoxCore" icon="gear">
+    The business logic layer. Houses all services, cores, and data models — completely independent of any UI framework.
+  </Card>
+  <Card title="EquinoxUI" icon="layout">
+    Reusable UI components: custom views, windows, and controls used throughout the main app.
+  </Card>
+  <Card title="EquinoxAssets" icon="palette">
+    Shared resources including colors, fonts, images, and the `Localizable.strings` localization files.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Keeping business logic in `EquinoxCore` and assets in `EquinoxAssets` makes it straightforward to write unit tests against the core layer without pulling in AppKit or UI dependencies.
+</Tip>
+
+## Code style
+
+Equinox enforces code style with [SwiftLint](https://github.com/realm/SwiftLint). The project ships a `.swiftlint.yml` configuration file at the repository root that defines the active rules.
+
+<Info>
+  SwiftLint runs automatically as part of the Xcode build phases. Install it with Homebrew so the build does not fail:
+
+  ```bash
+  brew install swiftlint
+  ```
+</Info>
+
+Before opening a pull request, make sure your changes produce no new SwiftLint warnings or errors.
+
+## Submitting a pull request
+
+<Steps>
+  <Step title="Fork the repository">
+    Click **Fork** on the [Equinox GitHub page](https://github.com/rlxone/Equinox) to create your own copy of the repository.
+  </Step>
+  <Step title="Create a feature branch">
+    Branch off `main` with a descriptive name:
+
+    ```bash
+    git checkout -b fix/solar-calculation-edge-case
+    ```
+  </Step>
+  <Step title="Make your changes and commit">
+    Write your code, ensure it builds cleanly, and commit with a clear message describing what changed and why.
+  </Step>
+  <Step title="Push and open a PR">
+    Push your branch to your fork and open a pull request against the `main` branch of `rlxone/Equinox` on GitHub. Describe the problem you are solving and include steps to reproduce any bug you fixed.
+  </Step>
+</Steps>
+
+## Related pages
+
+- [Codebase architecture](/contributing/architecture) — understand how the modules fit together before making structural changes
+- [Translating Equinox](/contributing/translating) — add a new language to the app

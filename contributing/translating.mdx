@@ -1,0 +1,85 @@
+---
+title: "How to Translate Equinox into a New Language for macOS"
+description: "Step-by-step guide to adding a new language to Equinox by forking the repo, creating a translation branch, and updating Localizable.strings in EquinoxAssets."
+---
+
+Equinox is built with first-class localization support, and every user-visible string is managed through a single `Localizable.strings` file in the `EquinoxAssets` module. Adding a new language takes only a few steps in Xcode and does not require changes to any Swift source files.
+
+## Current languages
+
+Equinox is already translated into the following languages by community contributors:
+
+| Language | Variant |
+|---|---|
+| English | — |
+| French | — |
+| Turkish | — |
+| Chinese | Simplified |
+| Chinese | Traditional |
+| Chinese | Traditional, Hong Kong |
+| German | — |
+| Korean | — |
+| Spanish | Latin America |
+
+<Info>
+  If your target language is already listed above, you can still help by reviewing and improving existing translations. Open an issue on GitHub to coordinate with the current maintainer of that locale.
+</Info>
+
+## How localization works
+
+All user-facing strings are defined in `Localizable.strings` files inside the **EquinoxAssets** module. The `Localization.swift` file in that same module exposes a type-safe Swift API over those strings — so adding a new language is purely a matter of providing a translated copy of `Localizable.strings` for your locale.
+
+## Adding a new translation
+
+<Steps>
+  <Step title="Fork the repository">
+    Go to [github.com/rlxone/Equinox](https://github.com/rlxone/Equinox) and click **Fork** to create a copy under your own GitHub account. Clone your fork locally:
+
+    ```bash
+    git clone https://github.com/<your-username>/Equinox.git
+    cd Equinox
+    ```
+  </Step>
+  <Step title="Create a translation branch">
+    Create a branch named `translation-xx`, replacing `xx` with the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code for your language (for example, `translation-ja` for Japanese):
+
+    ```bash
+    git checkout -b translation-xx
+    ```
+  </Step>
+  <Step title="Add the language in Xcode">
+    Open the workspace in Xcode. You need to add your language to **two** targets:
+
+    1. Select the **Equinox** project in the Project navigator → **Info** tab → **Localizations** → click **+** and choose your language.
+    2. Repeat the same step for the **EquinoxAssets** project.
+
+    Xcode will generate placeholder `.strings` files for the new locale automatically.
+  </Step>
+  <Step title="Translate Localizable.strings">
+    Open the newly generated `Localizable.strings` file for your locale inside `EquinoxAssets`. Translate every string value on the right-hand side of each `=` assignment. Do not modify the keys on the left-hand side.
+
+    ```
+    /* Example entry */
+    "wallpaper.main.solar" = "Your translated text here";
+    ```
+
+    <Tip>
+      Keep translations concise. UI labels often appear in constrained spaces such as toolbar buttons and gallery cells, so very long strings may be clipped.
+    </Tip>
+  </Step>
+  <Step title="Update the README">
+    Open `README.md` in the repository root and add your language to the **Translation** section, following the same format as the existing entries (language name, variant if applicable, and your GitHub handle).
+  </Step>
+  <Step title="Open a pull request">
+    Commit your changes, push the branch to your fork, and open a pull request against the `main` branch of `rlxone/Equinox`. Include the language name and locale code in the PR title, for example: `Add Japanese (ja) translation`.
+  </Step>
+</Steps>
+
+<Note>
+  Only translate strings inside `Localizable.strings`. Source code files such as `Localization.swift` define the Swift API over those strings and should not be modified during a translation contribution.
+</Note>
+
+## Related pages
+
+- [Development guide](/contributing/development) — set up a local build before editing the project in Xcode
+- [Codebase architecture](/contributing/architecture) — understand where EquinoxAssets fits in the overall module structure

@@ -1,0 +1,70 @@
+---
+title: 'Appearance Wallpapers: Sync with Light and Dark Mode'
+description: 'Pair one image for Light Mode and one for Dark Mode, then let macOS switch between them automatically whenever the system appearance changes.'
+---
+
+Appearance wallpapers are the simplest wallpaper type Equinox supports, and the best starting point if you have never created a dynamic wallpaper before. You provide exactly two images — one to display when macOS is in Light Mode, and one for Dark Mode — and macOS handles the rest. Whenever the system appearance changes, either through your own toggle in System Settings or through an automatic schedule you have configured in macOS, the desktop image switches instantly to match.
+
+## How appearance wallpapers work
+
+An appearance wallpaper stores two images side by side in a single HEIC file, along with metadata that identifies which image belongs to which mode. macOS reads the current system appearance setting and displays the corresponding image:
+
+- **Light Mode** — shows the image you designated for light appearance
+- **Dark Mode** — shows the image you designated for dark appearance
+
+The switch happens at the system level, so it applies immediately across all desktops and Spaces, and persists until the appearance changes again.
+
+<Note>
+The switching is controlled entirely by the macOS appearance setting. Equinox does not provide a separate schedule or timer for appearance wallpapers. To automate the switch on a time-based schedule, use the built-in Appearance schedule in **System Settings → General → Appearance**.
+</Note>
+
+## What you need before you start
+
+- Exactly two images: one intended for a light background context and one for a dark background context
+- Images in a supported format: PNG, JPEG, TIFF, or HEIC
+
+<Tip>
+Choose images that look good in their respective contexts. Light Mode images tend to work best with brighter, higher-key scenes, while Dark Mode images benefit from darker tones and less visual noise. High contrast between the two makes the appearance switch feel intentional rather than jarring.
+</Tip>
+
+## Creating an appearance wallpaper
+
+<Steps>
+  <Step title="Select the Appearance type">
+    Open Equinox and choose **Appearance** from the wallpaper type selector on the main screen. The gallery will show two slots: one for your light image and one for your dark image.
+  </Step>
+  <Step title="Add your light mode image">
+    Drag and drop your Light Mode image into the light slot, or click to browse for a file. This image will display when macOS is set to Light Mode.
+  </Step>
+  <Step title="Add your dark mode image">
+    Add your Dark Mode image to the dark slot in the same way. This image displays when macOS switches to Dark Mode.
+  </Step>
+  <Step title="Export the wallpaper">
+    Click **Export** and choose a location to save. Equinox produces a single HEIC file containing both images and the appearance metadata that macOS needs to display the correct one.
+  </Step>
+</Steps>
+
+## After exporting
+
+Once you have your HEIC file, apply it as your desktop wallpaper. Right-click the file in Finder, then choose **Services → Set Desktop Picture**. You can then toggle between Light Mode and Dark Mode in **System Settings → General → Appearance** to verify that both images display correctly.
+
+<Info>
+macOS Mojave (10.14) introduced the Light and Dark desktop wallpaper standard that Equinox uses. Appearance wallpapers work on macOS Mojave and all later versions.
+</Info>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Solar wallpapers" icon="sun" href="/wallpapers/solar">
+    For a more dynamic result tied to the actual position of the sun, explore solar wallpapers.
+  </Card>
+  <Card title="Time wallpapers" icon="clock" href="/wallpapers/time">
+    Schedule images to appear at specific times of day instead of reacting to system appearance.
+  </Card>
+  <Card title="Supported image formats" icon="file-image" href="/guides/image-formats">
+    Learn which source image formats Equinox accepts when building any wallpaper type.
+  </Card>
+  <Card title="Setting your wallpaper" icon="monitor" href="/guides/setting-wallpaper">
+    Step-by-step instructions for applying your exported wallpaper in macOS.
+  </Card>
+</CardGroup>

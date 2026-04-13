@@ -1,0 +1,69 @@
+---
+title: "PNG, JPEG, TIFF, and HEIC: Equinox Image Format Guide"
+description: "Equinox accepts PNG, JPEG, TIFF, and HEIC as source images. Learn which format suits each use case and how format choice affects your exported wallpaper."
+---
+
+Equinox accepts four image formats as source files: PNG, JPEG, TIFF, and HEIC. You can mix formats freely within a single wallpaper — for example, a Solar wallpaper with some PNG frames and some JPEG frames is perfectly valid. Regardless of what format your source images are in, Equinox always exports the finished wallpaper as a single `.heic` file. That file is the macOS Dynamic Desktop container format and is what you apply to your desktop. The format decision you make affects only your source images, not the exported wallpaper itself.
+
+## Format overview
+
+<CardGroup cols={2}>
+  <Card title="HEIC" icon="star">
+    High Efficiency Image Container. The best quality-to-file-size ratio of the four formats. Recommended for photographs, especially when you have many frames in a Solar or Time wallpaper and want to keep the total size of your source assets manageable.
+  </Card>
+  <Card title="JPEG">
+    Joint Photographic Experts Group. Lossy compression with broad compatibility across apps and devices. A good default for most photographs when HEIC is not available or when you need to share source images with tools that do not support HEIC.
+  </Card>
+  <Card title="PNG">
+    Portable Network Graphics. Lossless compression — the file retains every pixel exactly as captured. Best for screenshots, graphics, illustrations, and any image where sharp edges or transparency must be preserved without artefacts.
+  </Card>
+  <Card title="TIFF">
+    Tagged Image File Format. Lossless and widely supported in professional imaging workflows. Produces large files, so it is best reserved for situations where you are working with high-bit-depth source images or integrating with professional photo editing tools.
+  </Card>
+</CardGroup>
+
+## Choosing a format
+
+The right format depends on your source material and how you are working.
+
+<AccordionGroup>
+  <Accordion title="I have photographs from a camera or phone">
+    Use **HEIC** if your device produced HEIC files — this avoids an unnecessary conversion and preserves the original quality. Use **JPEG** if your device produced JPEG files or if you need wider compatibility with other tools. Avoid converting photographs to PNG or TIFF for use in Equinox, as this increases file size without any visual benefit for photographic content.
+  </Accordion>
+  <Accordion title="I have screenshots or digital illustrations">
+    Use **PNG**. Screenshots and graphics typically contain sharp edges, text, and solid colours that compress poorly in JPEG and would show compression artefacts. PNG's lossless compression preserves these details exactly.
+  </Accordion>
+  <Accordion title="I am working in a professional photo editing workflow">
+    If your editing application exports TIFF files natively and you want to avoid an extra conversion step, TIFF is a valid choice. Be aware that TIFF files are significantly larger than HEIC or JPEG, so a wallpaper with many TIFF frames will take up more disk space during the authoring process.
+  </Accordion>
+  <Accordion title="I want to keep source asset sizes small">
+    Use **HEIC**. It delivers the best compression among the supported formats while maintaining high image quality, making it the most efficient choice when you are working with many frames.
+  </Accordion>
+</AccordionGroup>
+
+## The exported wallpaper format
+
+Whatever formats you use for your source images, Equinox always exports the finished wallpaper as a `.heic` file. This is the container format macOS uses for Dynamic Desktop wallpapers, introduced in macOS Mojave (10.14). The file embeds all your images along with the metadata macOS needs to determine which image to display at any given time.
+
+<Note>
+  The `.heic` export format is a requirement of the macOS Dynamic Desktop specification — it is not configurable in Equinox. Source image formats are the only format choice available to you.
+</Note>
+
+## Format validation
+
+When you add an image to Equinox, the app validates that the file is in one of the four supported formats before accepting it. If you attempt to add an unsupported format — such as WebP or BMP — Equinox will reject the file.
+
+<Tip>
+  Use high-resolution source images. macOS scales wallpapers to fit the display, so images that are smaller than your screen resolution will appear soft. For Retina displays, aim for source images at 2x your target resolution.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create your first wallpaper" icon="wand-magic-sparkles" href="/quickstart">
+    A walkthrough of building an Appearance wallpaper from two images in a few minutes.
+  </Card>
+  <Card title="Set a dynamic wallpaper" icon="desktop" href="/guides/setting-wallpaper">
+    How to apply your exported `.heic` file to your desktop and confirm it animates correctly.
+  </Card>
+</CardGroup>

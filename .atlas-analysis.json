@@ -1,0 +1,82 @@
+{
+  "projectType": "general",
+  "projectName": "Equinox",
+  "projectDescription": "A native macOS app for creating dynamic wallpapers that change based on sun position, time of day, or system appearance (Light/Dark Mode).",
+  "theme": "almond",
+  "primaryColor": "#66b1ec",
+  "lightColor": "#09071a",
+  "darkColor": "#d6ab9c",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Wallpaper Types",
+            "pages": [
+              "wallpapers/solar",
+              "wallpapers/time",
+              "wallpapers/appearance"
+            ]
+          },
+          {
+            "group": "Solar Calculator",
+            "pages": [
+              "solar-calculator/overview",
+              "solar-calculator/using-calculator"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/setting-wallpaper",
+              "guides/image-formats",
+              "guides/troubleshooting"
+            ]
+          },
+          {
+            "group": "Contributing",
+            "pages": [
+              "contributing/development",
+              "contributing/translating",
+              "contributing/architecture"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Solar dynamic wallpapers that adapt to sun position (altitude and azimuth) throughout the year",
+    "Time-based wallpapers that cycle through images according to a custom daily schedule",
+    "Appearance wallpapers that switch between light and dark images based on macOS system appearance",
+    "Built-in Solar Calculator to determine sun position using GPS coordinates, date, and time",
+    "Drag-and-drop image import with support for PNG, JPEG, TIFF, and HEIC formats",
+    "Exports wallpapers as native macOS HEIC files compatible with Dynamic Desktop",
+    "Available on Mac App Store and as a direct GitHub download",
+    "Localized in 9+ languages including English, French, Chinese, German, Korean, and Spanish"
+  ],
+  "publicApiSurface": [
+    "WallpaperType: solar | time | appearance",
+    "ImageType: .solar(altitude: Double, azimuth: Double) | .time(date: Date) | .appearance",
+    "AppearanceType: .light | .dark",
+    "ImageFormatType: .png | .jpeg | .tiff | .heic",
+    "ImageAttributes(url: URL, index: Int, primary: Bool, imageType: ImageType, appearanceType: AppearanceType?)",
+    "WallpaperService.createWallpaper(_ attributes: [ImageAttributes], progressCallback: ProgressCallback?) throws -> Data",
+    "SolarService.altitude(latitude: Double, longitude: Double, date: Date, timezone: Int, dlstime: Int) throws -> Double",
+    "SolarService.azimuth(latitude: Double, longitude: Double, date: Date, timezone: Int, dlstime: Int) throws -> Double",
+    "ImageService.validateImage(url: URL, imageFormat: [ImageFormatType]) -> Bool",
+    "ImageService.getImageMetadata(for url: URL) throws -> ExifMetadata",
+    "ExifMetadata: latitude, longitude, createDate, timezone",
+    "SolarMetadata: index, altitude, azimuth",
+    "WalkthroughType: solarWallpaper | timeWallpaper | appearanceWallpaper | solarCalculator | setWallpaper"
+  ]
+}

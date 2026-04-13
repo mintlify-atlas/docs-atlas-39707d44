@@ -1,0 +1,134 @@
+---
+title: "Using the Solar Calculator to Tag Wallpaper Images"
+description: "Step-by-step guide to entering location, date, and time in the Solar Calculator and assigning the computed altitude and azimuth to each wallpaper image."
+---
+
+The Solar Calculator is available inside Equinox's solar wallpaper creation flow. For every image in your solar wallpaper, you open the calculator, supply the place and time the photo was taken, and drag or copy the resulting altitude and azimuth onto that image. This page walks through each part of that process in detail.
+
+## Before you begin
+
+Gather the following information for each photo in your wallpaper set before starting:
+
+- **Where** the photo was taken (city, landmark, or GPS coordinates)
+- **When** it was taken (date and approximate time)
+- **Whether daylight saving time** was in effect at that location on that date
+
+If your photos came from a smartphone or a GPS-enabled camera, this information is likely already stored in the file's EXIF metadata and will be pre-filled automatically.
+
+<Info>
+  You do not need to run the calculator for every image at once. You can open it, assign values to one image, close it, and come back later for the next.
+</Info>
+
+## Steps
+
+<Steps>
+  <Step title="Open the Solar Calculator">
+    In Equinox, start or open a **solar wallpaper** project. Each image tile in the wallpaper editor has a calculator button. Click it for the image you want to work with. The Solar Calculator window opens alongside the wallpaper editor.
+  </Step>
+
+  <Step title="Set the location">
+    The calculator displays a **Location** section with a map and two text fields for **latitude** and **longitude**.
+
+    - If the image file contains GPS EXIF data, the map and coordinate fields will already be populated. Verify the pin is in the correct place.
+    - If the fields are empty, click on the map to drop a pin at the photo location, or type the coordinates directly. Use decimal degrees — for example, `51.507` / `-0.128` for central London.
+    - You can also click the location button to use your Mac's current location as a starting point, then adjust from there.
+
+    <Tip>
+      Latitude runs from –90 (south pole) to +90 (north pole). Longitude runs from –180 to +180, with negative values west of the prime meridian.
+    </Tip>
+  </Step>
+
+  <Step title="Set the date and time">
+    The calculator shows a **Date** field and a **Sun Timeline**.
+
+    - If the image contains an EXIF creation date, the date field will be pre-filled. Confirm it matches the date shown in your photo's metadata.
+    - To change the date, click the date field and pick the correct day.
+    - To set the time, drag the scrubber on the **Sun Timeline**. The timeline shows the sun's elevation angle at the selected location plotted across all 24 hours of the selected day. As you drag, the time label updates in real time.
+
+    <Tip>
+      If you are unsure of the exact time, look at the sun's height and direction in your photo and match the scrubber to the point on the curve where the elevation looks right. A golden-hour shot taken just after sunrise should sit near the left-hand rise on the curve; a harsh midday photo should sit near the peak.
+    </Tip>
+  </Step>
+
+  <Step title="Set the timezone">
+    Below the date field, a **Timezone** dropdown lets you select the timezone that was active at the photo location. The current timezone abbreviation and its UTC offset are shown next to the selector.
+
+    - If EXIF timezone data was present, this may already be correct.
+    - Otherwise, choose the timezone from the grouped list (organized by continent and city).
+
+    <Note>
+      If the selected timezone observes daylight saving time on the selected date, a **DST indicator** will appear. This means the calculator is already accounting for the one-hour DST offset — you do not need to adjust the time manually.
+    </Note>
+  </Step>
+
+  <Step title="Read the computed result">
+    The **Result** section displays two values that update instantly as you adjust any input:
+
+    | Value | What it means |
+    |---|---|
+    | **Altitude** | The sun's elevation above the horizon in degrees (0° = horizon, 90° = overhead) |
+    | **Azimuth** | The sun's compass direction in degrees (0° = north, 90° = east, 180° = south, 270° = west) |
+
+    Both values are rounded to two decimal places. Double-check that the numbers look plausible for the photo — a sunrise shot should show an altitude near 0°, and a photo taken facing south at midday in the northern hemisphere should show an azimuth near 180°.
+  </Step>
+
+  <Step title="Assign the result to the image">
+    Once you are satisfied with the values, assign them to the image using one of these methods:
+
+    - **Drag and drop** — drag the result card from the calculator window and drop it directly onto the corresponding image tile in the wallpaper editor. The altitude and azimuth values are transferred automatically.
+    - **Copy** — click the copy button on the result card to copy the values, then paste them onto the image tile manually.
+
+    The image tile in the editor will update to show the assigned altitude and azimuth. Repeat this process for each image in your solar wallpaper set.
+  </Step>
+</Steps>
+
+## Tips for accurate results
+
+<CardGroup cols={2}>
+  <Card title="Use photos with EXIF data" icon="image">
+    Smartphone photos almost always include GPS coordinates and a creation timestamp. These pre-fill the calculator fields and eliminate the most common source of error — entering the wrong location or time.
+  </Card>
+  <Card title="Match the sun's angle visually" icon="sun">
+    When the exact time is unknown, use the Sun Timeline as a visual guide. Adjust the scrubber until the plotted elevation matches the apparent height of the sun in your photo.
+  </Card>
+  <Card title="Account for DST" icon="clock">
+    Always check whether daylight saving time was active when the photo was taken. The calculator shows a DST indicator when DST applies — if it is missing and you suspect DST was in effect, verify the timezone selection.
+  </Card>
+  <Card title="Spread altitude values across the day" icon="chart-line">
+    A good solar wallpaper has images taken (or assigned) at varied altitudes spanning the full range from sunrise to sunset. This gives macOS enough data points to produce smooth, natural transitions throughout the day.
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The altitude and azimuth fields are blank">
+    Both coordinate fields (latitude and longitude) must contain valid values before the calculator can compute a result. Check that neither field is empty and that the values are within range: latitude must be between –90 and 90, longitude between –180 and 180.
+  </Accordion>
+  <Accordion title="The result doesn't match what I expected">
+    Verify the timezone selection. A wrong timezone is the most common cause of an unexpected result — each hour of timezone error shifts the sun's position by roughly 15° in azimuth. Also confirm the date is correct, as sun position varies significantly across seasons.
+  </Accordion>
+  <Accordion title="The drag and drop isn't working">
+    Drag starting from the result card itself, not from the map or input fields. The drag target is the image tile in the wallpaper editor. Both windows must be visible at the same time — the drag operation does not work if the editor is behind the calculator window.
+  </Accordion>
+  <Accordion title="My photo's EXIF location is slightly off">
+    GPS accuracy in consumer cameras and phones can vary by a few meters to a few hundred meters. For sun position calculations, this level of error is negligible — it will have no visible effect on the computed altitude or azimuth. You only need to correct the location if it is in the wrong city or region entirely.
+  </Accordion>
+</AccordionGroup>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Solar Calculator overview" icon="book-open" href="/solar-calculator/overview">
+    Understand what altitude and azimuth mean and how the NOAA solar algorithm computes them.
+  </Card>
+  <Card title="Solar wallpapers" icon="sun" href="/wallpapers/solar">
+    Learn how to build a complete solar wallpaper project in Equinox from start to finish.
+  </Card>
+  <Card title="Setting your wallpaper" icon="desktop" href="/guides/setting-wallpaper">
+    Instructions for applying your finished wallpaper file as the macOS desktop background.
+  </Card>
+  <Card title="Supported image formats" icon="file-image" href="/guides/image-formats">
+    Learn which image formats Equinox accepts and how to prepare your photos before importing.
+  </Card>
+</CardGroup>

@@ -1,0 +1,95 @@
+---
+title: "Troubleshoot Equinox: Fix Dynamic Wallpaper Issues on macOS"
+description: "Resolve the most frequent problems with Equinox wallpapers, including static images that won't animate, missing Services menu items, and incorrect solar frames."
+---
+
+Most issues with Equinox wallpapers fall into one of a few categories: the wallpaper appears static when it should animate, the **Set Desktop Picture** shortcut is missing from the right-click menu, or a Solar wallpaper displays the wrong image for the current time of day. This page addresses each of these problems with step-by-step fixes rooted in how macOS handles the Dynamic Desktop format.
+
+## Common issues
+
+<AccordionGroup>
+  <Accordion title="Wallpaper doesn't change over time (Solar or Time type)">
+    This is the most common issue after applying a Solar or Time wallpaper. It is caused by a macOS behaviour that requires a built-in Dynamic Desktop wallpaper to be active before you apply your own. Without that step, macOS treats the `.heic` file as a static image even though it contains dynamic metadata.
+
+    **Fix:**
+
+    1. Open **System Settings → Wallpaper** (or **System Preferences → Desktop & Screen Saver** on macOS Ventura and earlier).
+    2. Select any built-in Dynamic Desktop wallpaper — for example, macOS Sonoma or macOS Big Sur.
+    3. Make sure the type selector below the preview is set to **Dynamic**, not **Light** or **Dark (Still)**.
+    4. Locate your Equinox `.heic` file in Finder.
+    5. Right-click it and choose **Services → Set Desktop Picture**.
+
+    After completing these steps, your wallpaper should begin animating. See the [full guide](/guides/setting-wallpaper) for more detail on this workflow.
+  </Accordion>
+
+  <Accordion title="Services → Set Desktop Picture does not appear">
+    The **Set Desktop Picture** action is a macOS Finder service. It can be absent if the service has been disabled in your keyboard shortcuts settings.
+
+    **Fix:**
+
+    1. Open **System Settings → Keyboard** (or **System Preferences → Keyboard**).
+    2. Click **Keyboard Shortcuts**.
+    3. Select **Services** from the left sidebar.
+    4. Scroll to the **Pictures** section and make sure **Set Desktop Picture** is checked.
+    5. Quit and relaunch Finder — press **Command+Option+Escape**, select **Finder**, and click **Relaunch**.
+
+    After relaunching Finder, right-click your `.heic` file again. The **Services → Set Desktop Picture** option should now appear.
+
+    <Note>
+      On some macOS versions, the service may appear under **Quick Actions** rather than **Services** in the right-click menu.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Solar wallpaper shows the wrong image for the time of day">
+    Each image in a Solar wallpaper is tagged with the sun's altitude and azimuth at the moment it was captured. If the wrong image appears for the current time, the altitude and azimuth values assigned to one or more images are likely incorrect.
+
+    **Fix:**
+
+    1. Open the Solar Calculator in Equinox. See [Using the Solar Calculator](/solar-calculator/using-calculator) for a full walkthrough.
+    2. For each image, enter the **location**, **date**, and **time** when the photo was taken.
+    3. Verify that the calculated altitude and azimuth match the lighting conditions visible in the photo — the sun should appear at roughly the same height in the sky as the calculator reports.
+    4. Drag and drop the corrected values onto the image, then re-export the wallpaper.
+    5. Apply the new `.heic` file using **Services → Set Desktop Picture**.
+
+    <Tip>
+      If you don't know the exact time a photo was taken, use the Sun timeline in the Solar Calculator to visually match the sun's height in the photo to the timeline position.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="How to test whether a wallpaper is animating correctly">
+    Waiting for real time to pass is impractical when verifying a wallpaper. macOS lets you advance the system clock manually to trigger wallpaper transitions.
+
+    1. Open **System Settings → General → Date & Time** (or **System Preferences → Date & Time**).
+    2. Turn off **Set time automatically**.
+    3. Advance the time by several hours.
+    4. Check your desktop — the wallpaper should switch to the image corresponding to the new time.
+    5. Re-enable **Set time and date automatically** when you are done.
+
+    <Warning>
+      Changing the system clock affects all running applications that rely on the current time. Close time-sensitive apps before testing and restore the setting promptly.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="Wallpaper reverts to a static image after restarting">
+    If your wallpaper animates correctly after you first apply it but reverts to a static image after a restart, the Dynamic Desktop prerequisite step may need to be repeated. This can occur after macOS updates or after resetting desktop settings.
+
+    Repeat the fix from the first section above: set a built-in Dynamic Desktop wallpaper to **Dynamic** mode, then re-apply your Equinox wallpaper using **Services → Set Desktop Picture**.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<CardGroup cols={2}>
+  <Card title="Set a dynamic wallpaper" icon="desktop" href="/guides/setting-wallpaper">
+    The complete step-by-step process for applying an Equinox wallpaper to your desktop, including the Dynamic Desktop prerequisite.
+  </Card>
+  <Card title="Using the Solar Calculator" icon="calculator" href="/solar-calculator/using-calculator">
+    How to find accurate altitude and azimuth values for each photo in a Solar wallpaper.
+  </Card>
+  <Card title="Solar Calculator overview" icon="sun" href="/solar-calculator/overview">
+    An introduction to how the Solar Calculator determines the sun's position from location and time data.
+  </Card>
+  <Card title="Supported image formats" icon="image" href="/guides/image-formats">
+    Details on the four source formats Equinox accepts and guidance on which to use.
+  </Card>
+</CardGroup>

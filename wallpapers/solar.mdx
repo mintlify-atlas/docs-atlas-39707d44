@@ -1,0 +1,91 @@
+---
+title: 'Solar Wallpapers: Create Sun-Driven Dynamic Desktops'
+description: 'Create wallpapers that shift with the actual position of the sun, showing the right image based on solar altitude and azimuth at your location.'
+---
+
+Solar wallpapers are the most sophisticated wallpaper type Equinox offers. Instead of following a fixed clock schedule, each image in the set is tagged with the sun's position — its altitude above the horizon and its compass direction (azimuth) — at the moment the photo was taken. macOS continuously reads the current sun position for your location and displays whichever image best matches, so your desktop shifts naturally through dawn, morning, midday, afternoon, and dusk without any manual intervention.
+
+## How solar wallpapers work
+
+Every image in a solar wallpaper carries two pieces of positional data:
+
+- **Altitude** — the sun's angle above the horizon in degrees. Negative values represent the sun below the horizon (before sunrise or after sunset).
+- **Azimuth** — the compass direction of the sun in degrees, measured clockwise from north. East is 90°, south is 180°, west is 270°.
+
+When macOS evaluates which image to display, it calculates the current solar altitude and azimuth for your location and picks the image whose values are the closest match. The image marked as **primary** acts as the fallback and is always shown first when the wallpaper loads.
+
+<Tip>
+Use at least 3–4 images for a smooth visual transition throughout the day. A set of 8–12 images — covering pre-dawn, sunrise, mid-morning, noon, afternoon, sunset, dusk, and night — produces the most natural result.
+</Tip>
+
+## What you need before you start
+
+- A series of photos taken at the same location at different times of day (or across different seasons)
+- The approximate date, time, and location for each photo, so the Solar Calculator can determine the sun's position
+- Images in a supported format: PNG, JPEG, TIFF, or HEIC
+
+<Note>
+All images in a solar wallpaper set must have the same dimensions. macOS displays them at full resolution, so use your highest-quality originals.
+</Note>
+
+## Creating a solar wallpaper
+
+<Steps>
+  <Step title="Select the Solar type">
+    Open Equinox and choose **Solar** from the wallpaper type selector on the main screen. The gallery panel will appear, ready to accept your images.
+  </Step>
+  <Step title="Add your images">
+    Drag and drop your photos into the gallery, or click the add button to browse for files. You can add as many images as you like. The gallery displays each image alongside its current altitude and azimuth values (blank until you assign them).
+  </Step>
+  <Step title="Assign sun positions">
+    For each image, you need to set the altitude and azimuth that match when and where the photo was taken. You have two options:
+
+    **Using the Solar Calculator (recommended):** Open the Solar Calculator, enter the location, date, and time the photo was taken, then drag and drop the result onto the corresponding image in the gallery. See [Using the Solar Calculator](/solar-calculator/using-calculator) for a full walkthrough.
+
+    **Setting values manually:** Click on an image in the gallery and enter the altitude and azimuth values directly if you already know them.
+  </Step>
+  <Step title="Mark the primary image">
+    One image must be designated as **primary**. This image is displayed first when the wallpaper loads and serves as the fallback when no other image's sun position closely matches the current conditions. Click the primary toggle on the image you want to use — a midday or well-lit image is usually a good choice.
+  </Step>
+  <Step title="Export the wallpaper">
+    Click **Export** and choose a save location. Equinox packages all the images and their solar metadata into a single HEIC file that macOS recognises as a Dynamic Desktop wallpaper.
+  </Step>
+</Steps>
+
+## Understanding altitude and azimuth
+
+| Value | Meaning |
+|---|---|
+| Altitude = 0° | Sun exactly on the horizon (sunrise or sunset) |
+| Altitude = 45° | Sun halfway up the sky |
+| Altitude = 90° | Sun directly overhead (only near the equator at solar noon) |
+| Altitude < 0° | Sun below the horizon |
+| Azimuth = 0° / 360° | Sun due north |
+| Azimuth = 90° | Sun due east |
+| Azimuth = 180° | Sun due south |
+| Azimuth = 270° | Sun due west |
+
+<Info>
+The Solar Calculator uses the NOAA solar algorithm to compute precise altitude and azimuth values. You only need to provide the location, date, and time — the calculator does the rest.
+</Info>
+
+## Tips for a great solar wallpaper
+
+<CardGroup cols={2}>
+  <Card title="Use the Solar Calculator" icon="sun" href="/solar-calculator/overview">
+    Let Equinox compute altitude and azimuth from your photo's location and timestamp instead of entering values manually.
+  </Card>
+  <Card title="Choose a consistent scene" icon="image" href="/guides/image-formats">
+    Photos taken from the same vantage point at different times of day produce the most cohesive wallpaper set.
+  </Card>
+  <Card title="Cover the full day" icon="clock" href="/wallpapers/time">
+    Include images from before sunrise through after sunset to ensure macOS always has a close match for the current sun position.
+  </Card>
+  <Card title="Set the wallpaper in macOS" icon="monitor" href="/guides/setting-wallpaper">
+    After exporting, right-click the file and choose Services → Set Desktop Picture to apply your wallpaper.
+  </Card>
+</CardGroup>
+
+<Warning>
+After setting a solar wallpaper, macOS must have Location Services enabled for the wallpaper to update correctly. If the desktop does not change, verify that Equinox (or the system) has location access in System Settings → Privacy & Security → Location Services.
+</Warning>

@@ -1,0 +1,108 @@
+---
+title: "Equinox Module Architecture: Core, UI, Assets, and App"
+description: "A high-level map of Equinox's four Swift modules — Equinox, EquinoxCore, EquinoxUI, and EquinoxAssets — and the services, cores, and models inside each one."
+---
+
+Equinox is structured as a multi-module Xcode workspace. Each module has a single, well-defined responsibility, which keeps the codebase easy to navigate and the business logic fully decoupled from the user interface. This page gives you a map of the four modules and the key types inside them.
+
+## Module overview
+
+<CardGroup cols={2}>
+  <Card title="Equinox" icon="app-window">
+    The main AppKit application target. Owns the app lifecycle, window coordination, and the glue that connects EquinoxUI views to EquinoxCore services.
+  </Card>
+  <Card title="EquinoxCore" icon="gear">
+    The business logic layer. Contains all services, lower-level cores, and the shared data models. Has no dependency on AppKit or any UI framework.
+  </Card>
+  <Card title="EquinoxUI" icon="layout">
+    A library of reusable AppKit views and windows. Depends on EquinoxAssets for colors, fonts, and images, but knows nothing about EquinoxCore directly.
+  </Card>
+  <Card title="EquinoxAssets" icon="palette">
+    Shared resources: color definitions, font references, image assets, and the `Localizable.strings` files that power the app's localization.
+  </Card>
+</CardGroup>
+
+<Info>
+  The strict layering — Equinox → EquinoxUI → EquinoxAssets, and Equinox → EquinoxCore — means you can read, test, or modify the business logic in EquinoxCore without opening a single UI file.
+</Info>
+
+## EquinoxCore in depth
+
+EquinoxCore is where most of the application logic lives. It is split into two sub-layers: **services** (high-level operations consumed by the app) and **cores** (lower-level, focused utilities consumed by services).
+
+### Services
+
+Services are the primary interface between the main app and the business logic. Each service handles a distinct domain:
+
+<CardGroup cols={2}>
+  <Card title="WallpaperService" icon="image">
+    Orchestrates the end-to-end process of assembling and exporting a dynamic wallpaper file from a set of user-provided images and metadata.
+  </Card>
+  <Card title="SolarService" icon="sun">
+    Calculates the sun's altitude and azimuth for a given location, date, and time. Powers the solar calculator feature.
+  </Card>
+  <Card title="ImageService" icon="camera">
+    Handles image loading, format validation, and the processing pipeline applied to images before they are embedded in a wallpaper.
+  </Card>
+  <Card title="FileService" icon="file">
+    Manages reading and writing files on disk, including saving the finished wallpaper to a user-chosen location.
+  </Card>
+  <Card title="SettingsService" icon="sliders">
+    Persists and retrieves user preferences, keeping application state consistent across launches.
+  </Card>
+  <Card title="SupportService" icon="heart">
+    Manages in-app donation and purchase flows via StoreKit, including loading products, processing purchases, and persisting support status.
+  </Card>
+</CardGroup>
+
+### Cores
+
+Cores are lower-level utilities that services build on. They encapsulate specific technical concerns and are not called directly by the main app:
+
+| Core | Responsibility |
+|---|---|
+| `FileCore` | Low-level file system operations — path resolution, reading raw data, and writing bytes to disk. |
+| `ImageCacheCore` | An in-memory cache for decoded images, reducing redundant I/O during image-heavy workflows. |
+| `ImageCore` | Core image decoding, encoding, and pixel-level manipulation used by `ImageService`. |
+| `MetadataCore` | Reads and writes EXIF and custom metadata tags embedded in image files. |
+| `SolarCore` | The underlying solar position algorithm (based on the NOAA solar calculator) used by `SolarService`. |
+| `StorageCore` | A thin wrapper around `UserDefaults` and any persistent storage mechanism used by `SettingsService`. |
+
+## Shared models
+
+EquinoxCore defines the data models that flow between layers. Key types include:
+
+<CardGroup cols={2}>
+  <Card title="ImageType" icon="layers">
+    An enum with three cases — `solar`, `time`, and `appearance` — representing the three wallpaper types the app supports.
+  </Card>
+  <Card title="ImageAttributes" icon="sliders-horizontal">
+    Carries the data bundle for each image: its file URL, position index, whether it is the primary image, its `ImageType`, and an optional `AppearanceType`.
+  </Card>
+  <Card title="SolarMetadata" icon="sun">
+    Stores the index, altitude, and azimuth values that macOS reads at runtime to determine which solar wallpaper image to display.
+  </Card>
+  <Card title="ExifMetadata" icon="tag">
+    Wraps the raw EXIF data read from or written to an image file, used when embedding solar position data into the wallpaper.
+  </Card>
+  <Card title="AppearanceType" icon="circle-half-stroke">
+    Distinguishes between `light` and `dark` variants in an appearance-based wallpaper, mapping each image to the correct macOS appearance mode.
+  </Card>
+  <Card title="ImageFormatType" icon="file-image">
+    Represents the supported output image container format for the finished wallpaper file.
+  </Card>
+</CardGroup>
+
+## How a wallpaper is created
+
+To ground the module map in a concrete flow: when a user clicks **Create**, the main `Equinox` app calls `WallpaperService`, which coordinates `ImageService` (to process each image), `MetadataCore` (to embed solar or time metadata), and `FileService` (to write the finished `.heic` file to disk). The solar data attached to each image was originally computed by `SolarService` via `SolarCore` when the user used the solar calculator.
+
+<Tip>
+  A good place to start reading the code is `WallpaperService.swift`, since it ties together most of the other services and cores into a single, readable workflow.
+</Tip>
+
+## Related pages
+
+- [Development guide](/contributing/development) — build the project locally and understand the repo layout
+- [Translating Equinox](/contributing/translating) — where EquinoxAssets and `Localizable.strings` fit in
+- [Solar wallpapers](/wallpapers/solar) — end-user view of the solar wallpaper feature built on `SolarService`

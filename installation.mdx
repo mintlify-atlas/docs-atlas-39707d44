@@ -1,0 +1,73 @@
+---
+title: "How to Install Equinox on macOS (Mojave and Later)"
+description: "Download and install Equinox from the Mac App Store or GitHub Releases. Requires macOS 10.14 Mojave or later on any supported Mac."
+---
+
+Equinox is a native macOS app distributed through two channels: the Mac App Store and GitHub Releases. Both provide the same application — the App Store is the simpler option if you want automatic updates, while GitHub Releases is useful if you prefer to manage downloads manually or want to verify a specific build. Either way, installation takes less than a minute.
+
+## Requirements
+
+<Info>
+  Equinox requires **macOS 10.14 Mojave or later**. Dynamic Desktop wallpaper support was introduced in Mojave, and Equinox relies on that platform capability to build and set wallpapers.
+</Info>
+
+## Download options
+
+<CardGroup cols={2}>
+  <Card title="Mac App Store" icon="apple" href="https://apps.apple.com/us/app/equinox-create-wallpaper/id1591510203">
+    Install directly from Apple. Updates are delivered automatically through the App Store.
+  </Card>
+  <Card title="GitHub Releases" icon="github" href="https://github.com/rlxone/Equinox/releases">
+    Download the latest `.dmg` from the open-source repository. Manual update check required.
+  </Card>
+</CardGroup>
+
+## Install from the Mac App Store
+
+<Steps>
+  <Step title="Open the App Store listing">
+    Visit the [Equinox listing on the Mac App Store](https://apps.apple.com/us/app/equinox-create-wallpaper/id1591510203) or search for "Equinox" in the Mac App Store application.
+  </Step>
+  <Step title="Click Get">
+    Click **Get**, then **Install App**. Authenticate with Touch ID or your Apple ID password if prompted.
+  </Step>
+  <Step title="Open Equinox">
+    Once the download completes, click **Open** in the App Store, or launch Equinox from Launchpad or your Applications folder.
+  </Step>
+  <Step title="Complete the first-launch walkthrough">
+    On first launch, Equinox walks you through the available wallpaper types and basic controls. Follow the prompts to get oriented before you start creating.
+  </Step>
+</Steps>
+
+## Install from GitHub Releases
+
+<Steps>
+  <Step title="Go to the Releases page">
+    Open [github.com/rlxone/Equinox/releases](https://github.com/rlxone/Equinox/releases) and find the latest release at the top of the list.
+  </Step>
+  <Step title="Download the DMG">
+    Under **Assets**, download the `.dmg` file for the latest release.
+  </Step>
+  <Step title="Mount and install">
+    Double-click the downloaded `.dmg` to mount it, then drag the **Equinox** icon into your **Applications** folder.
+  </Step>
+  <Step title="Open Equinox">
+    Eject the disk image, then open Equinox from your Applications folder or Launchpad.
+  </Step>
+  <Step title="Allow the app to run (if prompted)">
+    If macOS shows a security warning the first time you open Equinox, go to **System Settings → Privacy & Security** and click **Open Anyway** next to the Equinox entry.
+  </Step>
+  <Step title="Complete the first-launch walkthrough">
+    Equinox shows an introductory walkthrough on first launch. Follow the prompts to get oriented before creating your first wallpaper.
+  </Step>
+</Steps>
+
+<Warning>
+  Gatekeeper may block GitHub builds on first open because the binary is downloaded outside the App Store. This is expected behavior for any app distributed outside of the App Store. Use **Open Anyway** in Privacy & Security settings to proceed.
+</Warning>
+
+## Next step
+
+<Card title="Create your first dynamic wallpaper" icon="wand-magic-sparkles" href="/quickstart">
+  Ready to build? Follow the quickstart to create an Appearance wallpaper in a few minutes.
+</Card>

@@ -1,0 +1,99 @@
+---
+title: "How to Set a Dynamic Wallpaper on macOS with Equinox"
+description: "Apply an Equinox-exported .heic file to your desktop and configure macOS so Solar and Time wallpapers animate correctly over the course of the day."
+---
+
+After you export a wallpaper from Equinox, you have a single `.heic` file ready to apply to your desktop. macOS treats this file as a native Dynamic Desktop wallpaper, but there is a prerequisite for Solar and Time wallpapers: macOS must already be running a Dynamic Desktop before you swap in your own. Skipping that step is the most common reason a newly applied wallpaper shows only one image instead of cycling through the full sequence. This guide walks you through both the prerequisite and the final application step.
+
+## Before you start
+
+<CardGroup cols={2}>
+  <Card title="Solar wallpaper" icon="sun" href="/wallpapers/solar">
+    How to build a wallpaper that shifts images based on the sun's position in the sky.
+  </Card>
+  <Card title="Time wallpaper" icon="clock" href="/wallpapers/time">
+    How to build a wallpaper that rotates images on a schedule you define.
+  </Card>
+  <Card title="Appearance wallpaper" icon="circle-half-stroke" href="/wallpapers/appearance">
+    How to build a wallpaper that toggles between Light and Dark Mode images.
+  </Card>
+  <Card title="Supported image formats" icon="image" href="/guides/image-formats">
+    Details on the four input formats Equinox accepts before export.
+  </Card>
+</CardGroup>
+
+## Apply an Appearance wallpaper
+
+Appearance wallpapers only require Light and Dark Mode images. macOS does not need a Dynamic Desktop preset to make them work, so the steps are simpler.
+
+<Steps>
+  <Step title="Locate the exported file">
+    Find the `.heic` file Equinox saved to your chosen location.
+  </Step>
+  <Step title="Right-click the file">
+    Right-click (or Control-click) the file in Finder and hover over **Services** in the context menu.
+  </Step>
+  <Step title="Choose Set Desktop Picture">
+    Select **Services → Set Desktop Picture**. macOS applies the wallpaper immediately.
+  </Step>
+  <Step title="Verify the result">
+    Open **System Settings → Appearance** and toggle between Light and Dark Mode to confirm both images display correctly.
+  </Step>
+</Steps>
+
+<Tip>
+  If **Set Desktop Picture** does not appear in the Services submenu, see the [troubleshooting guide](/guides/troubleshooting) for how to enable it.
+</Tip>
+
+## Apply a Solar or Time wallpaper
+
+Solar and Time wallpapers require macOS to recognise the file as a dynamic wallpaper. A known macOS behaviour can prevent this unless you first set a built-in Dynamic Desktop wallpaper before switching to your own. Follow the steps below in order.
+
+<Steps>
+  <Step title="Open Desktop & Screen Saver settings">
+    Open **System Settings** (or **System Preferences** on macOS Ventura and earlier) and navigate to **Wallpaper** (or **Desktop & Screen Saver**).
+  </Step>
+  <Step title="Choose any built-in Dynamic Desktop wallpaper">
+    Select one of Apple's built-in Dynamic Desktop wallpapers — for example, the macOS Sonoma or Big Sur dynamic options.
+  </Step>
+  <Step title="Confirm it is set to Dynamic mode">
+    Below the wallpaper preview, make sure the type selector reads **Dynamic**. If it shows **Light** or **Dark (Still)**, change it to **Dynamic**.
+
+    <Note>
+      This step primes macOS to process dynamic metadata in `.heic` files. Without it, macOS may display your wallpaper as a static image.
+    </Note>
+  </Step>
+  <Step title="Locate your Equinox wallpaper in Finder">
+    Navigate to the `.heic` file Equinox exported.
+  </Step>
+  <Step title="Right-click and choose Set Desktop Picture">
+    Right-click the file and select **Services → Set Desktop Picture**. macOS replaces the built-in Dynamic Desktop with your Equinox wallpaper.
+  </Step>
+</Steps>
+
+<Warning>
+  Do not skip step 3. Setting the type to **Dynamic** before applying your file is required for the wallpaper to animate. If you apply the file first and then change the type, the wallpaper may still appear static.
+</Warning>
+
+## Test that the wallpaper is animating
+
+Once your wallpaper is applied, you can verify it works without waiting for real time to pass.
+
+<Steps>
+  <Step title="Open Date & Time settings">
+    Open **System Settings → General → Date & Time** (or **System Preferences → Date & Time** on older macOS versions).
+  </Step>
+  <Step title="Disable Set time automatically">
+    If **Set time automatically** is enabled, turn it off so you can adjust the time manually.
+  </Step>
+  <Step title="Change the time">
+    Advance the time by several hours. Your wallpaper should switch to the image that corresponds to the new time of day.
+  </Step>
+  <Step title="Re-enable automatic time">
+    After testing, turn **Set time and date automatically** back on to restore accurate system time.
+  </Step>
+</Steps>
+
+<Info>
+  For Solar wallpapers, the image that appears at a given time depends on the altitude and azimuth values you assigned when building the wallpaper. If the wrong image appears, verify those values in the [Solar Calculator](/solar-calculator/using-calculator).
+</Info>
